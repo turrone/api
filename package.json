@@ -4,7 +4,7 @@
   "description": "A NuGet server written in Node. Designed to host a Chocolatey internal package feed.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "husky": {
     "hooks": {
