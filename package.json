@@ -1,6 +1,6 @@
 {
   "name": "@turrone/turrone-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A NuGet server written in Node. Designed to host a Chocolatey internal package feed.",
   "main": "index.js",
   "scripts": {
