@@ -9,3 +9,7 @@ _Turrone Server_ is written in Node.js and designed to provide a number of featu
 - Inform nominated admin users when a client attempts to first download a package, so they can moderate it
 - Automatic notification on external package updates (depending on source)
 - Internal hosting of NuGet packages, with automatic re-packaging
+
+## License
+
+This project is licensed under the Apache 2 License - see the [LICENSE](LICENSE) file for details.
