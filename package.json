@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/turrone/turrone-server/issues"
   },
-  "homepage": "https://github.com/turrone/turrone-server#readme"
+  "homepage": "https://github.com/turrone/turrone-server#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.0"
+  }
 }
