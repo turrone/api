@@ -1,5 +1,4 @@
-const express = require("express");
-const app = express();
+const app = (module.exports = require("express")());
 const port = 80;
 const routes = require("./routes");
 
