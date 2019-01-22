@@ -4,9 +4,8 @@ version: 0.1.0-{build}-{branch}
 environment:
   matrix:
     # node.js
-    - nodejs_version: "lts"
-    - nodejs_version: "10"
     - nodejs_version: "current"
+    - nodejs_version: "lts"
 
 image:
   - Visual Studio 2015
