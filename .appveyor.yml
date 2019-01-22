@@ -24,7 +24,10 @@ cache:
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js
-  - ps: Install-Product node $env:nodejs_version $env:platform
+  # Supporting Windows and Ubuntu
+  # See: https://help.appveyor.com/discussions/questions/22219-installing-a-specifc-node-version-on-both-windows-and-linux-builds#comment_45615184
+  - cmd: powershell Install-Product node $env:nodejs_version $env:platform
+  - sh: nvm install $nodejs_version
   # Update npm
   - npm install -g npm@latest
   # install modules
