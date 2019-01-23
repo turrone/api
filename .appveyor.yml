@@ -27,7 +27,13 @@ install:
   # Supporting Windows and Ubuntu
   # See: https://help.appveyor.com/discussions/questions/22219-installing-a-specifc-node-version-on-both-windows-and-linux-builds#comment_45615184
   - cmd: powershell Install-Product node $env:nodejs_version $env:platform
-  - sh: nvm install $nodejs_version
+  # nvm doesn't use "current" for the latest version, but instead "node" (https://github.com/creationix/nvm#usage)
+  - sh: |
+      if [[ "$nodejs_version" == "lts" ]]; then
+        nvm install --lts
+      else
+        nvm install node
+      fi
   # Update npm
   - npm install -g npm@latest
   # install modules
