@@ -19,7 +19,7 @@ platform:
 cache:
   - node_modules # local npm modules
   - '%APPDATA%\npm-cache' # npm cache (Windows)
-  - "~/.npm" # npm cache (Ubuntu)
+  - ~/.npm # npm cache (Ubuntu)
 
 # Install scripts. (runs after repo cloning)
 install:
