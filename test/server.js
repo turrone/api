@@ -23,4 +23,23 @@ describe(apiRoot, () => {
         });
     });
   });
+
+  /*
+   * Test the /* [GET] route
+   */
+  describe(`/* [GET]`, () => {
+    it("should return 404 if no API route is known", done => {
+      chai
+        .request(server)
+        .get(`${apiRoot}/not-here`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.be.an("object");
+          res.body.should.have
+            .property("message")
+            .eql("Unknown route. Please check the URI and try again.");
+          done();
+        });
+    });
+  });
 });
