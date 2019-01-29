@@ -4,7 +4,8 @@
   "description": "A NuGet server written in Node. Designed to host a Chocolatey internal package feed.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
+    "test": "nyc mocha --exit"
   },
   "husky": {
     "hooks": {
@@ -17,7 +18,7 @@
         "eslint --fix",
         "git add"
       ],
-      "*.{json,md}": [
+      "*.{json,md,yml}": [
         "prettier --write",
         "git add"
       ]
@@ -39,11 +40,16 @@
   },
   "homepage": "https://github.com/turrone/turrone-server#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "codecov": "^3.1.0",
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^3.6.0",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "prettier": "^1.16.0"
   },
   "dependencies": {

@@ -1,0 +1,16 @@
+language: node_js
+os:
+  - linux
+  - osx
+  - windows
+sudo: false
+node_js:
+  - node
+  - lts/*
+cache: npm
+install:
+  - npm install
+script:
+  - npm test
+after_success:
+  - npm run coverage

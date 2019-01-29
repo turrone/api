@@ -1,0 +1,55 @@
+version: 0.1.0-{build}-{branch}
+
+# Test against the latest version of this Node.js version
+environment:
+  matrix:
+    # node.js
+    - nodejs_version: "current"
+    - nodejs_version: "lts"
+
+image:
+  - Visual Studio 2015
+  - Visual Studio 2017
+  - Ubuntu
+
+platform:
+  - x86
+  - x64
+
+cache:
+  - node_modules # local npm modules
+  - '%APPDATA%\npm-cache' # npm cache (Windows)
+  - ~/.npm # npm cache (Ubuntu)
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js
+  # Supporting Windows and Ubuntu
+  # See: https://help.appveyor.com/discussions/questions/22219-installing-a-specifc-node-version-on-both-windows-and-linux-builds#comment_45615184
+  - cmd: powershell Install-Product node $env:nodejs_version $env:platform
+  # nvm doesn't use "current" for the latest version, but instead "node" (https://github.com/creationix/nvm#usage)
+  - sh: |
+      if [[ "$nodejs_version" == "lts" ]]; then
+        nvm install --lts
+      else
+        nvm install node
+      fi
+  # Update npm
+  - npm install -g npm@latest
+  # install modules
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
+
+# On successful test completion, upload coverage data to Codecov
+on_success:
+  - npm run coverage
