@@ -49,3 +49,7 @@ test_script:
 
 # Don't actually build.
 build: off
+
+# On successful test completion, upload coverage data to Codecov
+on_success:
+  - npm run coverage
