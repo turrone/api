@@ -1,0 +1,3 @@
+# Recursively testing all files in this directory
+# See: https://stackoverflow.com/a/25150994
+--recursive
