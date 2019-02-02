@@ -24,6 +24,10 @@
       ]
     }
   },
+  "apidoc": {
+    "title": "Turrone Server API Endpoint Documentation",
+    "sampleUrl": "http://localhost:8080"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/turrone/turrone-server.git"
