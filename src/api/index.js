@@ -1,8 +1,9 @@
 const app = (module.exports = require("express")());
-const apiRoot = "/api/turrone/v1";
 
-app.use(apiRoot + "/server", require("./server"));
+// The root namespace for Turrone Server
+app.use("/turrone", require("./turrone"));
 
+// Any unknown API routes should respond with a 404 error
 app.all("*", (req, res) => {
   res
     .status(404)
