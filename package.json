@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
-    "doc": "npm run doc:api",
+    "doc": "npm run doc:api && npm run doc:dev",
     "doc:api": "apidoc -i src/api/ -o doc/api/",
+    "doc:dev": "documentation build src/** -f html -o doc/dev/ --github",
     "test": "nyc mocha --exit"
   },
   "husky": {
@@ -50,6 +51,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "codecov": "^3.1.0",
+    "documentation": "^9.1.1",
     "eslint": "^5.12.1",
     "eslint-config-prettier": "^3.6.0",
     "eslint-plugin-prettier": "^3.0.1",

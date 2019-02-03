@@ -5,6 +5,7 @@ const app = (module.exports = require("express")());
  * @apiName GetPing
  * @apiGroup Server
  * @apiVersion 0.1.0
+ * @ignore // Ignore API endpoint in developer documentation
  *
  * @apiDescription Before attempting to connect to any API endpoint of Turrone Server,
  * it's best to make sure that the server is at least running.
