@@ -7,8 +7,25 @@ const apiRoot = "/api";
 chai.use(chaiHttp);
 
 describe(apiRoot, () => {
-  /*
-   * Test the /* [GET] route
+  /**
+   * Test the / [GET] route to display API endpoint documentation
+   */
+  describe(`/ [GET]`, () => {
+    it("should display the API endpoint documentation", done => {
+      chai
+        .request(server)
+        .get(`${apiRoot}/`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.have.header("content-type", /^text/);
+          res.text.should.include("<p>Loading...</p>");
+          done();
+        });
+    });
+  });
+
+  /**
+   * Test the /* [GET] route to catch all unknown requests
    */
   describe(`/* [GET]`, () => {
     it("should return 404 if no API route is known", done => {
