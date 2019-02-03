@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
+    "doc": "npm run doc:api",
+    "doc:api": "apidoc -i src/api/ -o doc/api/",
     "test": "nyc mocha --exit"
   },
   "husky": {
@@ -24,6 +26,10 @@
       ]
     }
   },
+  "apidoc": {
+    "title": "Turrone Server API Endpoint Documentation",
+    "sampleUrl": "http://localhost:8080"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/turrone/turrone-server.git"
@@ -40,6 +46,7 @@
   },
   "homepage": "https://github.com/turrone/turrone-server#readme",
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "codecov": "^3.1.0",
