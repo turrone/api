@@ -1,31 +1,31 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server = require("../src/turrone-server");
+let server = require("../../src/turrone-server");
 let should = chai.should();
-const apiRoot = "/api/turrone/v1/server";
+const apiRoot = "/api";
 
 chai.use(chaiHttp);
 
 describe(apiRoot, () => {
-  /*
-   * Test the /ping [GET] route
+  /**
+   * Test the / [GET] route to display API endpoint documentation
    */
-  describe(`/ping [GET]`, () => {
-    it("it should be alive", done => {
+  describe(`/ [GET]`, () => {
+    it("should display the API endpoint documentation", done => {
       chai
         .request(server)
-        .get(`${apiRoot}/ping`)
+        .get(`${apiRoot}/`)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.an("object");
-          res.body.should.have.property("message").eql("pong");
+          res.should.have.header("content-type", /^text/);
+          res.text.should.include("<p>Loading...</p>");
           done();
         });
     });
   });
 
-  /*
-   * Test the /* [GET] route
+  /**
+   * Test the /* [GET] route to catch all unknown requests
    */
   describe(`/* [GET]`, () => {
     it("should return 404 if no API route is known", done => {
