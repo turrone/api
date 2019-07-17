@@ -154,10 +154,10 @@
     <Content Include="doc\dev\assets\fonts\WOFF\OTF\SourceCodePro-Regular.otf.woff" />
     <Content Include="doc\dev\assets\fonts\WOFF\TTF\SourceCodePro-Bold.ttf.woff" />
     <Content Include="doc\dev\assets\fonts\WOFF\TTF\SourceCodePro-Regular.ttf.woff" />
-    <Content Include="src\api.js" />
-    <Content Include="src\turrone\index.js" />
-    <Content Include="src\turrone\v1\index.js" />
-    <Content Include="src\turrone\v1\server\index.js" />
+    <Content Include="src\api.ts" />
+    <Content Include="src\turrone\index.ts" />
+    <Content Include="src\turrone\v1\index.ts" />
+    <Content Include="src\turrone\v1\server\index.ts" />
     <Content Include="test\api\api.js" />
     <Content Include="test\api\turrone\v1\server.js" />
     <Content Include="test\mocha.opts" />
