@@ -1,20 +1,14 @@
-# Turrone Server
+# API
 
-_Turrone Server_ is designed to be a NuGet compatible server to host an internal package feed. It is designed to be used as a source for a [Chocolatey](https://chocolatey.org/) [internal package feed](https://chocolatey.org/docs/how-to-host-feed), but should support other NuGet clients.
+_API_ contains the REST API endpoints for powering [Turrone Server](https://github.com/turrone/turrone-server). It is intended to be included as a module in _Turrone Server_, to be mounted at `/api`.
 
-_Turrone Server_ is written in Node.js and designed to provide a number of features. Some planned features are:
-
-- Simple installation and setup, to get running as quickly as possible
-- A package source for NuGet clients
-- Inform nominated admin users when a client attempts to first download a package, so they can moderate it
-- Automatic notification on external package updates (depending on source)
-- Internal hosting of NuGet packages, with automatic re-packaging
+_API_ is written in TypeScript and uses the NodeJS runtime environment.
 
 ## Developing
 
 ### Documentation
 
-_Turone Server_ has two locations for documentation. One is [for developers](doc/dev/index.html) of _Turrone Server_ and the other is for consumers of the [HTTP API endpoints](doc/api/index.html). When _Turrone Server_ is running, the HTTP API endpoints documentation is available at the root API endpoint (e.g. `http://localhost:8080/api/`).
+_API_ has two locations for documentation. One is [for developers](doc/dev/index.html) of _API_ and the other is for consumers of the [HTTP API endpoints](doc/api/index.html). When _API_ is running, the HTTP API endpoints documentation is available at the root API endpoint (e.g. `http://localhost:8080/api/`).
 
 To generate documentation, run `npm run doc`. This will run the generators for both documentation locations. Alternatively, run the relevant command: `npm run doc:api` or `npm run doc:dev`.
 
