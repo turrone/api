@@ -18,7 +18,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts}": [
       "eslint --fix",
       "git add"
     ],
@@ -47,6 +47,8 @@
   },
   "homepage": "https://github.com/turrone/api#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
     "apidoc": "^0.17.7",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
