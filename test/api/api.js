@@ -1,8 +1,8 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let server = require("../../src/turrone-server");
+let server = require("../../src/api");
 let should = chai.should();
-const apiRoot = "/api";
+const apiRoot = "/";
 
 chai.use(chaiHttp);
 
