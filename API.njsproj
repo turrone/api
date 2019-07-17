@@ -30,6 +30,7 @@
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="tsconfig.json" />
     <Content Include="doc\api\index.html" />
     <Content Include="doc\api\api_data.json" />
     <Content Include="doc\api\api_project.json" />
