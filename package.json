@@ -4,12 +4,14 @@
   "description": "REST API endpoints for powering Turrone Server",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build:ts",
+    "build": "npm run build:clean && npm run build:ts",
+    "build:clean": "del-cli dist/**",
     "build:ts": "tsc",
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
     "doc": "npm run doc:api && npm run doc:dev",
     "doc:api": "apidoc -i src/api/ -o doc/api/",
     "doc:dev": "documentation build src/** -f html -o doc/dev/ --github",
+    "postinstall": "npm run build",
     "test": "nyc mocha --exit"
   },
   "husky": {
@@ -62,10 +64,11 @@
     "lint-staged": "^9.2.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.3"
+    "prettier": "^1.18.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "del-cli": "^2.0.0",
+    "express": "^4.17.1",
+    "typescript": "^3.5.3"
   }
 }
