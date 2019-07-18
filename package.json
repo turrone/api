@@ -10,7 +10,7 @@
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
     "doc": "npm run doc:api && npm run doc:dev",
     "doc:api": "apidoc -i src/ -o doc/api/",
-    "doc:dev": "documentation build src/** -f html -o doc/dev/ --github",
+    "doc:dev": "",
     "postinstall": "npm run build",
     "test": "nyc mocha --exit"
   },
@@ -71,7 +71,6 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "codecov": "^3.5.0",
-    "documentation": "^12.0.2",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
