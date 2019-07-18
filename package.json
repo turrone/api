@@ -9,7 +9,7 @@
     "build:ts": "tsc",
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
     "doc": "npm run doc:api && npm run doc:dev",
-    "doc:api": "apidoc -i src/api/ -o doc/api/",
+    "doc:api": "apidoc -i src/ -o doc/api/",
     "doc:dev": "documentation build src/** -f html -o doc/dev/ --github",
     "postinstall": "npm run build",
     "test": "nyc mocha --exit"
