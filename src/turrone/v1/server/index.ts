@@ -25,6 +25,6 @@ export = app;
  *       "message": "pong"
  *     }
  */
-app.get("/ping", (req, res) => {
+app.get("/ping", (req: express.Request, res: express.Response): void => {
   res.status(200).json({ message: "pong" });
 });
