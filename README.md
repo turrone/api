@@ -12,7 +12,7 @@ _API_ has two locations for documentation. One is [for developers](doc/dev/index
 
 To generate documentation, run `npm run doc`. This will run the generators for both documentation locations. Alternatively, run the relevant command: `npm run doc:api` or `npm run doc:dev`.
 
-Documentation for developers uses [JSDoc](http://usejsdoc.org/) syntax and [documentation.js](http://documentation.js.org/) to generate them. HTTP API endpoint documentation uses [apiDoc](http://apidocjs.com) for both syntax and generation.
+Documentation for developers uses [TypeDoc](https://typedoc.org/) syntax and [typedoc](https://www.npmjs.com/package/typedoc) to generate them. HTTP API endpoint documentation uses [apiDoc](http://apidocjs.com) for both syntax and generation.
 
 ## License
 
