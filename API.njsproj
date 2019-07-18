@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7bea5a34-3f10-4019-b23d-9fdbf88e4325}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>dist\api.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <EnableTypeScript>true</EnableTypeScript>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>False</StartWebBrowser>
+    <JavaScriptTestFramework>mocha</JavaScriptTestFramework>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <NodejsPort>8080</NodejsPort>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include=".appveyor.yml" />
+    <Content Include=".codecov.yml" />
+    <Content Include=".eslintrc.json" />
+    <Content Include=".gitignore" />
+    <Content Include=".prettierignore" />
+    <Content Include=".travis.yml" />
+    <Content Include="LICENSE" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="tsconfig.json" />
+    <Content Include="doc\api\index.html" />
+    <Content Include="doc\api\api_data.json" />
+    <Content Include="doc\api\api_project.json" />
+    <Content Include="doc\api\api_data.js" />
+    <Content Include="doc\api\api_project.js" />
+    <Content Include="doc\api\main.js" />
+    <Content Include="doc\dev\index.html" />
+    <Content Include="doc\api\css\style.css" />
+    <Content Include="doc\api\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="doc\api\img\favicon.ico" />
+    <Content Include="doc\api\locales\ca.js" />
+    <Content Include="doc\api\locales\cs.js" />
+    <Content Include="doc\api\locales\de.js" />
+    <Content Include="doc\api\locales\es.js" />
+    <Content Include="doc\api\locales\fr.js" />
+    <Content Include="doc\api\locales\it.js" />
+    <Content Include="doc\api\locales\locale.js" />
+    <Content Include="doc\api\locales\nl.js" />
+    <Content Include="doc\api\locales\pl.js" />
+    <Content Include="doc\api\locales\pt_br.js" />
+    <Content Include="doc\api\locales\ro.js" />
+    <Content Include="doc\api\locales\ru.js" />
+    <Content Include="doc\api\locales\tr.js" />
+    <Content Include="doc\api\locales\vi.js" />
+    <Content Include="doc\api\locales\zh.js" />
+    <Content Include="doc\api\locales\zh_cn.js" />
+    <Content Include="doc\api\utils\handlebars_helper.js" />
+    <Content Include="doc\api\utils\send_sample_request.js" />
+    <Content Include="doc\api\vendor\bootstrap.min.css" />
+    <Content Include="doc\api\vendor\prettify.css" />
+    <Content Include="doc\api\vendor\bootstrap.min.js" />
+    <Content Include="doc\api\vendor\diff_match_patch.min.js" />
+    <Content Include="doc\api\vendor\handlebars.min.js" />
+    <Content Include="doc\api\vendor\jquery.min.js" />
+    <Content Include="doc\api\vendor\list.min.js" />
+    <Content Include="doc\api\vendor\lodash.custom.min.js" />
+    <Content Include="doc\api\vendor\polyfill.js" />
+    <Content Include="doc\api\vendor\require.min.js" />
+    <Content Include="doc\api\vendor\semver.min.js" />
+    <Content Include="doc\api\vendor\webfontloader.js" />
+    <Content Include="doc\api\vendor\path-to-regexp\index.js" />
+    <Content Include="doc\api\vendor\prettify\prettify.css" />
+    <Content Include="doc\api\vendor\prettify\lang-aea.js" />
+    <Content Include="doc\api\vendor\prettify\lang-agc.js" />
+    <Content Include="doc\api\vendor\prettify\lang-apollo.js" />
+    <Content Include="doc\api\vendor\prettify\lang-basic.js" />
+    <Content Include="doc\api\vendor\prettify\lang-cbm.js" />
+    <Content Include="doc\api\vendor\prettify\lang-cl.js" />
+    <Content Include="doc\api\vendor\prettify\lang-clj.js" />
+    <Content Include="doc\api\vendor\prettify\lang-css.js" />
+    <Content Include="doc\api\vendor\prettify\lang-dart.js" />
+    <Content Include="doc\api\vendor\prettify\lang-el.js" />
+    <Content Include="doc\api\vendor\prettify\lang-erl.js" />
+    <Content Include="doc\api\vendor\prettify\lang-erlang.js" />
+    <Content Include="doc\api\vendor\prettify\lang-fs.js" />
+    <Content Include="doc\api\vendor\prettify\lang-go.js" />
+    <Content Include="doc\api\vendor\prettify\lang-hs.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lasso.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lassoscript.js" />
+    <Content Include="doc\api\vendor\prettify\lang-latex.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lgt.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lisp.js" />
+    <Content Include="doc\api\vendor\prettify\lang-ll.js" />
+    <Content Include="doc\api\vendor\prettify\lang-llvm.js" />
+    <Content Include="doc\api\vendor\prettify\lang-logtalk.js" />
+    <Content Include="doc\api\vendor\prettify\lang-ls.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lsp.js" />
+    <Content Include="doc\api\vendor\prettify\lang-lua.js" />
+    <Content Include="doc\api\vendor\prettify\lang-matlab.js" />
+    <Content Include="doc\api\vendor\prettify\lang-ml.js" />
+    <Content Include="doc\api\vendor\prettify\lang-mumps.js" />
+    <Content Include="doc\api\vendor\prettify\lang-n.js" />
+    <Content Include="doc\api\vendor\prettify\lang-nemerle.js" />
+    <Content Include="doc\api\vendor\prettify\lang-pascal.js" />
+    <Content Include="doc\api\vendor\prettify\lang-proto.js" />
+    <Content Include="doc\api\vendor\prettify\lang-r.js" />
+    <Content Include="doc\api\vendor\prettify\lang-rd.js" />
+    <Content Include="doc\api\vendor\prettify\lang-rkt.js" />
+    <Content Include="doc\api\vendor\prettify\lang-rust.js" />
+    <Content Include="doc\api\vendor\prettify\lang-s.js" />
+    <Content Include="doc\api\vendor\prettify\lang-scala.js" />
+    <Content Include="doc\api\vendor\prettify\lang-scm.js" />
+    <Content Include="doc\api\vendor\prettify\lang-Splus.js" />
+    <Content Include="doc\api\vendor\prettify\lang-sql.js" />
+    <Content Include="doc\api\vendor\prettify\lang-ss.js" />
+    <Content Include="doc\api\vendor\prettify\lang-swift.js" />
+    <Content Include="doc\api\vendor\prettify\lang-tcl.js" />
+    <Content Include="doc\api\vendor\prettify\lang-tex.js" />
+    <Content Include="doc\api\vendor\prettify\lang-vb.js" />
+    <Content Include="doc\api\vendor\prettify\lang-vbs.js" />
+    <Content Include="doc\api\vendor\prettify\lang-vhd.js" />
+    <Content Include="doc\api\vendor\prettify\lang-vhdl.js" />
+    <Content Include="doc\api\vendor\prettify\lang-wiki.js" />
+    <Content Include="doc\api\vendor\prettify\lang-xq.js" />
+    <Content Include="doc\api\vendor\prettify\lang-xquery.js" />
+    <Content Include="doc\api\vendor\prettify\lang-yaml.js" />
+    <Content Include="doc\api\vendor\prettify\lang-yml.js" />
+    <Content Include="doc\api\vendor\prettify\prettify.js" />
+    <Content Include="doc\api\vendor\prettify\run_prettify.js" />
+    <Content Include="doc\dev\assets\bass-addons.css" />
+    <Content Include="doc\dev\assets\bass.css" />
+    <Content Include="doc\dev\assets\github.css" />
+    <Content Include="doc\dev\assets\split.css" />
+    <Content Include="doc\dev\assets\style.css" />
+    <Content Include="doc\dev\assets\anchor.js" />
+    <Content Include="doc\dev\assets\site.js" />
+    <Content Include="doc\dev\assets\split.js" />
+    <Content Include="doc\dev\assets\fonts\LICENSE.txt" />
+    <Content Include="doc\dev\assets\fonts\source-code-pro.css" />
+    <Content Include="doc\dev\assets\fonts\EOT\SourceCodePro-Bold.eot" />
+    <Content Include="doc\dev\assets\fonts\EOT\SourceCodePro-Regular.eot" />
+    <Content Include="doc\dev\assets\fonts\OTF\SourceCodePro-Bold.otf" />
+    <Content Include="doc\dev\assets\fonts\OTF\SourceCodePro-Regular.otf" />
+    <Content Include="doc\dev\assets\fonts\TTF\SourceCodePro-Bold.ttf" />
+    <Content Include="doc\dev\assets\fonts\TTF\SourceCodePro-Regular.ttf" />
+    <Content Include="doc\dev\assets\fonts\WOFF2\OTF\SourceCodePro-Bold.otf.woff2" />
+    <Content Include="doc\dev\assets\fonts\WOFF2\OTF\SourceCodePro-Regular.otf.woff2" />
+    <Content Include="doc\dev\assets\fonts\WOFF2\TTF\SourceCodePro-Bold.ttf.woff2" />
+    <Content Include="doc\dev\assets\fonts\WOFF2\TTF\SourceCodePro-Regular.ttf.woff2" />
+    <Content Include="doc\dev\assets\fonts\WOFF\OTF\SourceCodePro-Bold.otf.woff" />
+    <Content Include="doc\dev\assets\fonts\WOFF\OTF\SourceCodePro-Regular.otf.woff" />
+    <Content Include="doc\dev\assets\fonts\WOFF\TTF\SourceCodePro-Bold.ttf.woff" />
+    <Content Include="doc\dev\assets\fonts\WOFF\TTF\SourceCodePro-Regular.ttf.woff" />
+    <Content Include="src\api.ts" />
+    <Content Include="src\turrone\index.ts" />
+    <Content Include="src\turrone\v1\index.ts" />
+    <Content Include="src\turrone\v1\server\index.ts" />
+    <Content Include="test\api\api.js" />
+    <Content Include="test\api\turrone\v1\server.js" />
+    <Content Include="test\mocha.opts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="doc" />
+    <Folder Include="doc\api" />
+    <Folder Include="doc\api\css" />
+    <Folder Include="doc\api\fonts" />
+    <Folder Include="doc\api\img" />
+    <Folder Include="doc\api\locales" />
+    <Folder Include="doc\api\utils" />
+    <Folder Include="doc\api\vendor" />
+    <Folder Include="doc\api\vendor\path-to-regexp" />
+    <Folder Include="doc\api\vendor\prettify" />
+    <Folder Include="doc\dev" />
+    <Folder Include="doc\dev\assets" />
+    <Folder Include="doc\dev\assets\fonts" />
+    <Folder Include="doc\dev\assets\fonts\EOT" />
+    <Folder Include="doc\dev\assets\fonts\OTF" />
+    <Folder Include="doc\dev\assets\fonts\TTF" />
+    <Folder Include="doc\dev\assets\fonts\WOFF" />
+    <Folder Include="doc\dev\assets\fonts\WOFF\OTF" />
+    <Folder Include="doc\dev\assets\fonts\WOFF\TTF" />
+    <Folder Include="doc\dev\assets\fonts\WOFF2" />
+    <Folder Include="doc\dev\assets\fonts\WOFF2\OTF" />
+    <Folder Include="doc\dev\assets\fonts\WOFF2\TTF" />
+    <Folder Include="src" />
+    <Folder Include="src\turrone\" />
+    <Folder Include="src\turrone\v1\" />
+    <Folder Include="src\turrone\v1\server\" />
+    <Folder Include="test" />
+    <Folder Include="test\api" />
+    <Folder Include="test\api\turrone" />
+    <Folder Include="test\api\turrone\v1" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

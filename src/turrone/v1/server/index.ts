@@ -1,4 +1,7 @@
-const app = (module.exports = require("express")());
+import express from "express";
+const app = express();
+
+export = app;
 
 /**
  * @api {get} /api/turrone/v1/server/ping Check server is running
@@ -22,6 +25,6 @@ const app = (module.exports = require("express")());
  *       "message": "pong"
  *     }
  */
-app.get("/ping", (req, res) => {
+app.get("/ping", (req: express.Request, res: express.Response): void => {
   res.status(200).json({ message: "pong" });
 });
