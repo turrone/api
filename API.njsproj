@@ -149,7 +149,7 @@
     <Folder Include="doc\api\vendor" />
     <Folder Include="doc\api\vendor\path-to-regexp" />
     <Folder Include="doc\api\vendor\prettify" />
-    <Folder Include="doc\dev" />
+    <Folder Include="doc\dev\" />
     <Folder Include="src" />
     <Folder Include="src\turrone\" />
     <Folder Include="src\turrone\v1\" />

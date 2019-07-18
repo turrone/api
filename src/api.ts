@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
+/** Creates an Express instance */
 const app = express();
+/** The port number to use for the server instance */
 const port: string | number = process.env.port || 8080;
 
 export = app;

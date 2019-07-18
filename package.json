@@ -10,7 +10,7 @@
     "coverage": "nyc report --reporter=json && codecov -f coverage/coverage-final.json",
     "doc": "npm run doc:api && npm run doc:dev",
     "doc:api": "apidoc -i src/ -o doc/api/",
-    "doc:dev": "",
+    "doc:dev": "typedoc --out doc/dev/ src/",
     "postinstall": "npm run build",
     "test": "nyc mocha --exit"
   },
@@ -67,6 +67,7 @@
     "@types/mocha": "^5.2.7",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
+    "acorn": "^6.2.0",
     "apidoc": "^0.17.7",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -79,7 +80,8 @@
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
-    "ts-node": "^8.3.0"
+    "ts-node": "^8.3.0",
+    "typedoc": "^0.14.2"
   },
   "dependencies": {
     "del-cli": "^2.0.0",

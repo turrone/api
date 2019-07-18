@@ -1,4 +1,5 @@
 import express from "express";
+/** Creates an Express instance */
 const app = express();
 
 export = app;
