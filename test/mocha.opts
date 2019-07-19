@@ -1,3 +1,8 @@
+# Including support for TypeScript files
+# See: https://istanbul.js.org/docs/tutorials/typescript/
+# See: http://rundef.com/typescript-code-coverage-istanbul-nyc
+--require ts-node/register
+
 # Recursively testing all files in this directory
 # See: https://stackoverflow.com/a/25150994
 --recursive

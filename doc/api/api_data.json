@@ -34,7 +34,7 @@
         }
       ]
     },
-    "filename": "src/api/turrone/v1/server/index.js",
+    "filename": "src/turrone/v1/server/index.ts",
     "groupTitle": "Server",
     "sampleRequest": [
       {
