@@ -12,6 +12,7 @@
     "doc:api": "apidoc -i src/ -o doc/api/",
     "doc:dev": "typedoc --out doc/dev/ src/",
     "postinstall": "npm run build",
+    "start": "node index.js",
     "test": "nyc mocha --exit"
   },
   "husky": {

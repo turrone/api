@@ -2,8 +2,6 @@ import express from "express";
 import path from "path";
 /** Creates an Express instance */
 const app = express();
-/** The port number to use for the server instance */
-const port: string | number = process.env.port || 8080;
 
 export = app;
 
@@ -19,7 +17,3 @@ app.all("*", (req: express.Request, res: express.Response): void => {
     .status(404)
     .json({ message: "Unknown route. Please check the URI and try again." });
 });
-
-app.listen(port, (): void =>
-  console.log(`Turrone Server REST API listening on port ${port}!`)
-);
