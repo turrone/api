@@ -4,6 +4,8 @@ const app = express();
 
 export = app;
 
+app.use("/status", require("./status"));
+
 /**
  * @api {get} /api/turrone/v1/server/ping Check server is running
  * @apiName GetPing
