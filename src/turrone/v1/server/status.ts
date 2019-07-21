@@ -148,6 +148,7 @@ eventEmitter.on(
  *   * __setup.user__: There is no initial user created to log in and administer the server
  * * __database__:
  *   * __MongoNetworkError__: There was an issue connecting to the database
+ *   * __MongoParseError__: No hostname has been provided in the connection string
  *
  * @apiExample {curl} Example usage:
  *  curl -i http://localhost:8080/api/turrone/v1/server/status
