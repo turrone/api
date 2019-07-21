@@ -60,6 +60,10 @@ typings/
 # next.js build output
 .next
 
+# Local config files
+# See: https://github.com/lorenwest/node-config/wiki/Configuration-Files#local-files
+config/local*
+
 # TypeScript compiled files
 dist/
 
