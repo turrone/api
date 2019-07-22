@@ -70,9 +70,36 @@ describe(apiRoot, () => {
     });
 
     it("should have an API status of initializing", done => {
+      /**
+       * Reloading the server for it run the initializing test
+       *
+       * This is needed as various code paths can emit either of:
+       *  * `Event.ServerStatusAPIError`
+       *  * `Event.ServerStatusAPIOperational`
+       * and in doing so interfere with this test. Running this "reset"
+       * allows for this test to operate successfully.
+       *
+       * There isn't an easy way to reload the API endpoints as the server
+       * isn't really running for it to be restarted. The "best" way to
+       * do it is to remove any modules from the cache and load them again.
+       *
+       * See: https://github.com/lorenwest/node-config/issues/224#issuecomment-111163692
+       */
+      delete require.cache[require.resolve("../../../../../src/api")];
+      delete require.cache[require.resolve("../../../../../src/turrone")];
+      delete require.cache[require.resolve("../../../../../src/turrone/v1")];
+      delete require.cache[
+        require.resolve("../../../../../src/turrone/v1/server")
+      ];
+      delete require.cache[
+        require.resolve("../../../../../src/turrone/v1/server/status")
+      ];
+
+      apiInitializingServer = require("../../../../../src/turrone/v1/server/status");
+
       chai
-        .request(server)
-        .get(`${apiRoot}/status`)
+        .request(apiInitializingServer)
+        .get(`/`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.components.api.should.be.an("object");
