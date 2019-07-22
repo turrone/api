@@ -338,6 +338,57 @@ define({ "api": [
             "field": "see",
             "description": "<p>The alternative API endpoint to use to update the config file. See <a href=\"#api-Server-PatchConfig\">PATCH</a></p>"
           }
+        ],
+        "Error 500 - Internal Server Error": [
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to create the server config</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to create the server config</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>The container for the error details</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.details",
+            "description": "<p>The details of the error, which need to be corrected</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.category",
+            "description": "<p>The category of the error</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "Number",
+            "optional": false,
+            "field": "error.errno",
+            "description": "<p>The number of the error category</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.path",
+            "description": "<p>The attempted path to the config file</p>"
+          }
         ]
       },
       "examples": [
@@ -349,6 +400,11 @@ define({ "api": [
         {
           "title": "Response: Error 409 - Conflict",
           "content": "HTTP/1.1 409 Conflict\n{\n  \"status\": \"error\",\n  \"message\": \"The config file already exists\",\n  \"see\": \"PATCH http://localhost:8080/api/turrone/v1/server/config\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response: Error 500 - Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"status\": \"error\",\n  \"message\": \"Unable to create config file\",\n  \"error\": {\n    \"details\": \"EPERM: operation not permitted, open '/path/to/config/file/local{-NODE_ENV}.json'\",\n    \"category\": \"EPERM\",\n    \"errno\": -4048,\n    \"path\": \"/path/to/config/file/local{-NODE_ENV}.json\"\n  }\n}",
           "type": "json"
         }
       ]

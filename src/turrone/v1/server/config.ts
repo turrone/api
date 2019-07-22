@@ -1,6 +1,7 @@
 import { ConfigExists } from "../../../utils/config";
 import { eventEmitter, Event } from "../../../utils/events";
 import express from "express";
+import fs from "fs";
 import Joi from "@hapi/joi";
 /** Creates an Express instance */
 const app = express();
@@ -136,6 +137,26 @@ if (!ConfigExists()) {
  *       "message": "The config file already exists",
  *       "see": "PATCH http://localhost:8080/api/turrone/v1/server/config"
  *     }
+ *
+ * @apiError (Error 500 - Internal Server Error) {String} status          The status of the request to create the server config
+ * @apiError (Error 500 - Internal Server Error) {String} message         The message returned from attempting to create the server config
+ * @apiError (Error 500 - Internal Server Error) {Object} error           The container for the error details
+ * @apiError (Error 500 - Internal Server Error) {String} error.details   The details of the error, which need to be corrected
+ * @apiError (Error 500 - Internal Server Error) {String} error.category  The category of the error
+ * @apiError (Error 500 - Internal Server Error) {Number} error.errno     The number of the error category
+ * @apiError (Error 500 - Internal Server Error) {String} error.path      The attempted path to the config file
+ * @apiErrorExample {json} Response: Error 500 - Internal Server Error
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "status": "error",
+ *       "message": "Unable to create config file",
+ *       "error": {
+ *         "details": "EPERM: operation not permitted, open '/path/to/config/file/local{-NODE_ENV}.json'",
+ *         "category": "EPERM",
+ *         "errno": -4048,
+ *         "path": "/path/to/config/file/local{-NODE_ENV}.json"
+ *       }
+ *     }
  */
 app.post("/", (req: express.Request, res: express.Response): void => {
   if (ConfigExists()) {
@@ -161,11 +182,45 @@ app.post("/", (req: express.Request, res: express.Response): void => {
           }
         });
       } else {
-        // Send a success response if validation passes
-        res.status(201).json({
-          status: "success",
-          message: "Config file created successfully"
-        });
+        // Holds the filename for the config file `local-{NODE_ENV}.json`
+        let filename = "local";
+        if (typeof process.env.NODE_ENV !== "undefined") {
+          filename += "-" + process.env.NODE_ENV;
+        }
+
+        // The config files are stored under `./config/`, relative to
+        // the application root
+        // See: https://github.com/lorenwest/node-config/wiki/Configuration-Files
+        let path: string = "./config/" + filename + ".json";
+
+        // Attempt to save the config file
+        fs.writeFile(
+          path,
+          JSON.stringify(data),
+          (err: NodeJS.ErrnoException | null): void => {
+            if (err) {
+              // Send a 500 Internal Server Error response if the config
+              // file cannot be created
+              res.status(500).json({
+                status: "error",
+                message: "Unable to create config file",
+                error: {
+                  details: err.message,
+                  category: err.code,
+                  errno: err.errno,
+                  path: err.path
+                }
+              });
+            } else {
+              // Send a success response if validation passes and the file has
+              // successfully been created
+              res.status(201).json({
+                status: "success",
+                message: "Config file created successfully"
+              });
+            }
+          }
+        );
       }
     });
   }
