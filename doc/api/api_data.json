@@ -154,5 +154,211 @@
         "url": "http://localhost:8080/api/turrone/v1/server/status"
       }
     ]
+  },
+  {
+    "type": "post",
+    "url": "/api/turrone/v1/server/config",
+    "title": "Create the server configuration",
+    "name": "PostConfig",
+    "group": "Server",
+    "version": "0.1.0",
+    "description": "<p>Creates the initial config file for the API to access the database, along with additional settings that should not be stored in the database (e.g. those that need to be available before the database has been connected to, or in case of database connection errors).</p> <p><strong>Once an initial config file has been created, this API endpoint route cannot be used again. See <a href=\"#api-Server-PatchConfig\">PATCH</a></strong></p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost:8080/api/turrone/v1/server/config -X POST -H \"Content-Type: application/json\" -d '{\"dbConfig\": {\"host\": \"127.0.0.1\", \"port\": 27017, \"database\": \"turrone\"}}'",
+        "type": "curl"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json",
+            "description": "<p>Used to detect that the received data is JSON</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Content-Type\": \"application/json\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "dbConfig",
+            "description": "<p>The container for database settings</p>"
+          }
+        ],
+        "dbConfig": [
+          {
+            "group": "dbConfig",
+            "type": "String",
+            "optional": false,
+            "field": "host",
+            "description": "<p>The hostname for the database server</p>"
+          },
+          {
+            "group": "dbConfig",
+            "type": "Number",
+            "size": "1-65535",
+            "optional": false,
+            "field": "port",
+            "description": "<p>The port that the database server is listening on</p>"
+          },
+          {
+            "group": "dbConfig",
+            "type": "String",
+            "size": "1..63",
+            "optional": false,
+            "field": "database",
+            "description": "<p>The database to connect to. Cannot contain <a href=\"https://docs.mongodb.com/manual/reference/limits/#Restrictions-on-Database-Names-for-Windows\"><code>\\/. &quot;$*&lt;&gt;:|?</code></a></p>"
+          },
+          {
+            "group": "dbConfig",
+            "type": "String",
+            "optional": true,
+            "field": "username",
+            "description": "<p>The user account to use to connect to the database</p>"
+          },
+          {
+            "group": "dbConfig",
+            "type": "String",
+            "optional": true,
+            "field": "password",
+            "description": "<p>The password for the user account</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"dbConfig\": {\n    \"host\": \"127.0.0.1\",\n    \"port\": 27017,\n    \"database\": \"turrone\",\n    \"username\": \"TurroneDatabaseUser\",\n    \"password\": \"My5up3rS3cur3P@ssw0rd!\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 201 - Created": [
+          {
+            "group": "Success 201 - Created",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to create the server config</p>"
+          },
+          {
+            "group": "Success 201 - Created",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from creating the server config</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Success 201 - Created",
+          "content": "HTTP/1.1 201 Created\n{\n  \"status\": \"success\",\n  \"message\": \"Config file created successfully\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 400 - Bad Request": [
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to create the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from creating the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>The container for the error details</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "String",
+            "optional": false,
+            "field": "error.details",
+            "description": "<p>The details of the error, which need to be corrected</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "String",
+            "optional": false,
+            "field": "error.category",
+            "description": "<p>The category of the error</p>"
+          }
+        ],
+        "Error 409 - Conflict": [
+          {
+            "group": "Error 409 - Conflict",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to create the server config</p>"
+          },
+          {
+            "group": "Error 409 - Conflict",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to create the server config</p>"
+          },
+          {
+            "group": "Error 409 - Conflict",
+            "type": "String",
+            "optional": false,
+            "field": "see",
+            "description": "<p>The alternative API endpoint to use to update the config file. See <a href=\"#api-Server-PatchConfig\">PATCH</a></p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error 400 - Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"status\": \"error\",\n  \"message\": \"Invalid request data\",\n  \"error\": {\n    \"details\": \"\\\"host\\\" must be a valid hostname\",\n    \"category\": \"ValidationError\"\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response: Error 409 - Conflict",
+          "content": "HTTP/1.1 409 Conflict\n{\n  \"status\": \"error\",\n  \"message\": \"The config file already exists\",\n  \"see\": \"PATCH http://localhost:8080/api/turrone/v1/server/config\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/turrone/v1/server/config.ts",
+    "groupTitle": "Server",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/api/turrone/v1/server/config"
+      }
+    ]
   }
 ]
