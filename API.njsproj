@@ -138,6 +138,7 @@
     <Content Include="src\turrone\v1\server\index.ts" />
     <Content Include="test\api\api.js" />
     <Content Include="test\api\turrone\v1\server.js" />
+    <Content Include="test\api\turrone\v1\server\config.js" />
     <Content Include="test\api\turrone\v1\server\status.js" />
     <Content Include="test\mocha.opts" />
   </ItemGroup>
