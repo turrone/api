@@ -664,12 +664,46 @@ describe(apiRoot, () => {
           let error = res.body.error;
           Object.keys(error).should.have.a.lengthOf(4);
 
-          error.should.have
-            .property("details")
-            .eql("EPERM: operation not permitted, open '" + fullPath + "'");
-          error.should.have.property("category").eql("EPERM");
-          error.should.have.property("errno").eql(-4048);
-          error.should.have.property("path").eql(fullPath);
+          error.should.have.property("details").satisfy(function(details) {
+            // EPERM - Windows
+            // EACCES - Ubuntu / MacOS
+            if (
+              details ===
+                "EPERM: operation not permitted, open '" + fullPath + "'" ||
+              details === "EACCES: permission denied, open '" + configPath + "'"
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("category").satisfy(function(category) {
+            // EPERM - Windows
+            // EACCES - Ubuntu / MacOS
+            if (category === "EPERM" || category === "EACCES") {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("errno").satisfy(function(errno) {
+            // -4048 - Windows
+            // -13 - Ubuntu / MacOS
+            if (errno === -4048 || errno === -13) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("path").satisfy(function(path) {
+            // Absolute path - Windows
+            // Relative path - Ubuntu / MacOS
+            if (path === fullPath || path === configPath) {
+              return true;
+            } else {
+              return false;
+            }
+          });
 
           done();
         });
@@ -717,12 +751,46 @@ describe(apiRoot, () => {
           let error = res.body.error;
           Object.keys(error).should.have.a.lengthOf(4);
 
-          error.should.have
-            .property("details")
-            .eql("EPERM: operation not permitted, open '" + fullPath + "'");
-          error.should.have.property("category").eql("EPERM");
-          error.should.have.property("errno").eql(-4048);
-          error.should.have.property("path").eql(fullPath);
+          error.should.have.property("details").satisfy(function(details) {
+            // EPERM - Windows
+            // EACCES - Ubuntu / MacOS
+            if (
+              details ===
+                "EPERM: operation not permitted, open '" + fullPath + "'" ||
+              details === "EACCES: permission denied, open '" + configPath + "'"
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("category").satisfy(function(category) {
+            // EPERM - Windows
+            // EACCES - Ubuntu / MacOS
+            if (category === "EPERM" || category === "EACCES") {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("errno").satisfy(function(errno) {
+            // -4048 - Windows
+            // -13 - Ubuntu / MacOS
+            if (errno === -4048 || errno === -13) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          error.should.have.property("path").satisfy(function(path) {
+            // Absolute path - Windows
+            // Relative path - Ubuntu / MacOS
+            if (path === fullPath || path === configPath) {
+              return true;
+            } else {
+              return false;
+            }
+          });
 
           process.env.NODE_ENV = ORIGINAL_NODE_ENV;
 
