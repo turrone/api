@@ -33,7 +33,7 @@ function reloadServer() {
 }
 
 /**
- * Generates the name and path to the config file
+ * Generates the name of and path to the config file
  */
 function generateConfigFilenamePath() {
   // Holds the filename for the config file `local-{NODE_ENV}.json`
@@ -124,10 +124,11 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have.property("details").eql('"dbConfig" is required');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig");
 
           done();
         });
@@ -153,10 +154,11 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have.property("details").eql('"host" is required');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/host");
 
           done();
         });
@@ -184,10 +186,11 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have.property("details").eql('"port" is required');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/port");
 
           done();
         });
@@ -216,10 +219,11 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have.property("details").eql('"database" is required');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/database");
 
           done();
         });
@@ -247,12 +251,13 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
             .eql('"host" must be a valid hostname');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/host");
 
           done();
         });
@@ -281,12 +286,13 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
             .eql('"port" must be larger than or equal to 1');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/port");
 
           done();
         });
@@ -315,12 +321,13 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
             .eql('"port" must be a valid port');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/port");
 
           done();
         });
@@ -350,12 +357,13 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
             .eql('"database" is not allowed to be empty');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/database");
 
           done();
         });
@@ -386,7 +394,7 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
@@ -394,6 +402,7 @@ describe(apiRoot, () => {
               '"database" length must be less than or equal to 63 characters long'
             );
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/database");
 
           done();
         });
@@ -423,7 +432,7 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
@@ -431,6 +440,7 @@ describe(apiRoot, () => {
               '"database" with value "invalid database\\/. "$*<>: | ?name/here" matches the inverted database pattern'
             );
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/database");
 
           done();
         });
@@ -461,12 +471,13 @@ describe(apiRoot, () => {
           res.body.should.have.property("error");
           res.body.error.should.be.an("object");
           let error = res.body.error;
-          Object.keys(error).should.have.a.lengthOf(2);
+          Object.keys(error).should.have.a.lengthOf(3);
 
           error.should.have
             .property("details")
             .eql('"username" must only contain alpha-numeric characters');
           error.should.have.property("category").eql("ValidationError");
+          error.should.have.property("path").eql("/dbConfig/username");
 
           done();
         });

@@ -93,6 +93,7 @@
     "config": "^3.2.1",
     "del-cli": "^2.0.0",
     "express": "^4.17.1",
+    "json-ptr": "^1.1.2",
     "mongoose": "^5.6.5",
     "typescript": "^3.5.3"
   }

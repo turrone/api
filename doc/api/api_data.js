@@ -156,6 +156,306 @@ define({ "api": [
     ]
   },
   {
+    "type": "patch",
+    "url": "/api/turrone/v1/server/config",
+    "title": "Update the server configuration",
+    "name": "PatchConfig",
+    "group": "Server",
+    "version": "0.1.0",
+    "description": "<p>Updates the config file for the API to access the database, along with additional settings that should not be stored in the database (e.g. those that need to be available before the database has been connected to, or in case of database connection errors).</p> <p><strong>If an initial config file has not been created, this API endpoint route cannot be used. See <a href=\"#api-Server-PostConfig\">POST</a></strong></p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -i http://localhost:8080/api/turrone/v1/server/config -X PATCH -H \"Content-Type: application/json-patch+json\" -d '[{\"op\": \"replace\", \"path\": \"/dbConfig/host\", \"value\": \"NewDatabaseHost\"}]'",
+        "type": "curl"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Content-Type",
+            "defaultValue": "application/json-patch+json",
+            "description": "<p>Used to detect that the received data is a JSON PATCH object</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Content-Type\": \"application/json-patch+json\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": ".",
+            "description": "<p>The container for one or more PATCH operations</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": ".op",
+            "description": "<p>The operation to perform. <strong>Currently only <code>replace</code> is supported</strong></p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": ".path",
+            "description": "<p>A <a href=\"https://tools.ietf.org/html/rfc6901\">JSON pointer</a> to the value that is being modified</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": ".value",
+            "description": "<p>The updated value to use. The values submitted must meet the requirements that are in the <a href=\"#api-Server-PostConfig\">POST</a> parameters, otherwise the request will be rejected</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"/dbConfig/host\",\n    \"value\": \"NewDatabaseHost\"\n  },\n  {\n    \"op\": \"replace\",\n    \"path\": \"/dbConfig/port\",\n    \"value\": 27017\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200 - OK": [
+          {
+            "group": "Success 200 - OK",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to update the server config</p>"
+          },
+          {
+            "group": "Success 200 - OK",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from updating the server config</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Success 200 - OK",
+          "content": "HTTP/1.1 200 OK\n{\n  \"status\": \"success\",\n  \"message\": \"Config file updated successfully\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 400 - Bad Request: Config exists": [
+          {
+            "group": "Error 400 - Bad Request: Config exists",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Config exists",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Config exists",
+            "type": "String",
+            "optional": false,
+            "field": "see",
+            "description": "<p>The alternative API endpoint to use to create the config file. See <a href=\"#api-Server-PostConfig\">POST</a></p>"
+          }
+        ],
+        "Error 400 - Bad Request: Invalid PATCH data": [
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>The container for the error details</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "String",
+            "optional": false,
+            "field": "error.details",
+            "description": "<p>The details of the error, which needs to be corrected</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "String",
+            "optional": false,
+            "field": "error.category",
+            "description": "<p>The category of the error</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid PATCH data",
+            "type": "String",
+            "optional": false,
+            "field": "error.path",
+            "description": "<p>The <a href=\"https://tools.ietf.org/html/rfc6901\">path</a> to the value that has the error</p>"
+          }
+        ],
+        "Error 400 - Bad Request: Invalid request data": [
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to update the server config</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>The container for the error details</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "String",
+            "optional": false,
+            "field": "error.details",
+            "description": "<p>The details of the error, which needs to be corrected</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "String",
+            "optional": false,
+            "field": "error.category",
+            "description": "<p>The category of the error</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request: Invalid request data",
+            "type": "String",
+            "optional": false,
+            "field": "error.path",
+            "description": "<p>The <a href=\"https://tools.ietf.org/html/rfc6901\">path</a> to the value that has the error</p>"
+          }
+        ],
+        "Error 500 - Internal Server Error": [
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status of the request to update the server config</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The message returned from attempting to update the server config</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>The container for the error details</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.details",
+            "description": "<p>The details of the error, which need to be corrected</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.category",
+            "description": "<p>The category of the error</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "Number",
+            "optional": false,
+            "field": "error.errno",
+            "description": "<p>The number of the error category</p>"
+          },
+          {
+            "group": "Error 500 - Internal Server Error",
+            "type": "String",
+            "optional": false,
+            "field": "error.path",
+            "description": "<p>The attempted path to the config file</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error 400 - Bad Request: Config exists",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"status\": \"error\",\n  \"message\": \"The config file does not exist\",\n  \"see\": \"POST http://localhost:8080/api/turrone/v1/server/config\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response: Error 400 - Bad Request: Invalid PATCH data",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"status\": \"error\",\n  \"message\": \"Invalid PATCH data\",\n  \"error\": {\n    \"details\": \"\\\"value\\\" must be a string or \\\"value\\\" must be a number\",\n    \"category\": \"ValidationError\",\n    \"path\": \"/dbConfig/host\"\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response: Error 400 - Bad Request: Invalid request data",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"status\": \"error\",\n  \"message\": \"Invalid request data\",\n  \"error\": {\n    \"details\": \"\\\"host\\\" must be a valid hostname\",\n    \"category\": \"ValidationError\",\n    \"path\": \"/dbConfig/host\"\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Response: Error 500 - Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"status\": \"error\",\n  \"message\": \"Unable to update config file\",\n  \"error\": {\n    \"details\": \"EPERM: operation not permitted, open '/path/to/config/file/local{-NODE_ENV}.json'\",\n    \"category\": \"EPERM\",\n    \"errno\": -4048,\n    \"path\": \"/path/to/config/file/local{-NODE_ENV}.json\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/turrone/v1/server/config.ts",
+    "groupTitle": "Server",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/api/turrone/v1/server/config"
+      }
+    ]
+  },
+  {
     "type": "post",
     "url": "/api/turrone/v1/server/config",
     "title": "Create the server configuration",
@@ -314,6 +614,13 @@ define({ "api": [
             "optional": false,
             "field": "error.category",
             "description": "<p>The category of the error</p>"
+          },
+          {
+            "group": "Error 400 - Bad Request",
+            "type": "String",
+            "optional": false,
+            "field": "error.path",
+            "description": "<p>The <a href=\"https://tools.ietf.org/html/rfc6901\">path</a> to the value that has the error</p>"
           }
         ],
         "Error 409 - Conflict": [

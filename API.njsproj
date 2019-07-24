@@ -160,6 +160,8 @@
     <Folder Include="src\turrone\" />
     <Folder Include="src\turrone\v1\" />
     <Folder Include="src\turrone\v1\server\" />
+    <Folder Include="src\utils\%40types\" />
+    <Folder Include="src\utils\%40types\json-ptr\" />
     <Folder Include="test" />
     <Folder Include="test\api" />
     <Folder Include="test\api\turrone" />
@@ -177,6 +179,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\utils\events.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utils\%40types\json-ptr\index.d.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
