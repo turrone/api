@@ -48,6 +48,69 @@ function generateConfigFilenamePath() {
   return "./config/" + filename + ".json";
 }
 
+/**
+ * Renames any `local*.json` files before performing these tests, as they
+ * require writing / deleting various files
+ */
+function localFilesBackup() {
+  // Backup any existing local*.json files
+  fs.readdirSync("./config").filter(filename => {
+    // Matches:
+    //   local.json
+    //   local-environment.json
+    //   local-environment-instance.json
+    if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
+      fs.renameSync(
+        "./config/" + filename,
+        "./config/" + filename.replace("json", "bak")
+      );
+    }
+  });
+
+  // "Reload" the server so it reflects any deleted config files
+  reloadServer();
+}
+
+/**
+ * Removes any `local*.json` files created by tests, so that a clean state is
+ * available
+ */
+function localFilesCleanup() {
+  // Clear up local*.json files
+  fs.readdirSync("./config").filter(filename => {
+    // Matches:
+    //   local.json
+    //   local-environment.json
+    //   local-environment-instance.json
+    if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
+      fs.unlinkSync("./config/" + filename);
+    }
+  });
+}
+
+/**
+ * Renames any `local*.bak` files after performing these tests, so other tests
+ * can complete successfully
+ */
+function localFilesRestore() {
+  // Restore existing local*.bak files
+  fs.readdirSync("./config").filter(filename => {
+    // Matches:
+    //   local.bak
+    //   local-environment.bak
+    //   local-environment-instance.bak
+    if (filename.match(/local(-?[\w\d]+){0,2}\.bak/i)) {
+      fs.renameSync(
+        "./config/" + filename,
+        "./config/" + filename.replace("bak", "json")
+      );
+    }
+  });
+
+  // "Reload" the server so it reflects any deleted config files
+  reloadServer();
+}
+
 describe(apiRoot, () => {
   /*
    * Test the /config [POST] route
@@ -59,54 +122,15 @@ describe(apiRoot, () => {
    */
   describe(`/config [POST]`, () => {
     before(() => {
-      // Backup any existing local*.json files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.json
-        //   local-environment.json
-        //   local-environment-instance.json
-        if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
-          fs.renameSync(
-            "./config/" + filename,
-            "./config/" + filename.replace("json", "bak")
-          );
-        }
-      });
-
-      // "Reload" the server so it reflects any deleted config files
-      reloadServer();
+      localFilesBackup();
     });
 
     afterEach(() => {
-      // Clear up local*.json files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.json
-        //   local-environment.json
-        //   local-environment-instance.json
-        if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
-          fs.unlinkSync("./config/" + filename);
-        }
-      });
-
-      // "Reload" the server so it reflects any deleted config files
-      reloadServer();
+      localFilesCleanup();
     });
 
     after(() => {
-      // Restore existing local*.bak files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.bak
-        //   local-environment.bak
-        //   local-environment-instance.bak
-        if (filename.match(/local(-?[\w\d]+){0,2}\.bak/i)) {
-          fs.renameSync(
-            "./config/" + filename,
-            "./config/" + filename.replace("bak", "json")
-          );
-        }
-      });
+      localFilesRestore();
     });
 
     it("should respond with HTTP status 400 if '/dbConfig' key is not included", done => {
@@ -830,19 +854,7 @@ describe(apiRoot, () => {
    */
   describe(`/config [PATCH]`, () => {
     before(() => {
-      // Backup any existing local*.json files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.json
-        //   local-environment.json
-        //   local-environment-instance.json
-        if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
-          fs.renameSync(
-            "./config/" + filename,
-            "./config/" + filename.replace("json", "bak")
-          );
-        }
-      });
+      localFilesBackup();
     });
 
     beforeEach(() => {
@@ -869,35 +881,11 @@ describe(apiRoot, () => {
     });
 
     afterEach(() => {
-      // Clear up local*.json files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.json
-        //   local-environment.json
-        //   local-environment-instance.json
-        if (filename.match(/local(-?[\w\d]+){0,2}\.json/i)) {
-          fs.unlinkSync("./config/" + filename);
-        }
-      });
-
-      // "Reload" the server so it reflects any deleted config files
-      reloadServer();
+      localFilesCleanup();
     });
 
     after(() => {
-      // Restore existing local*.bak files
-      let files = fs.readdirSync("./config").filter(filename => {
-        // Matches:
-        //   local.bak
-        //   local-environment.bak
-        //   local-environment-instance.bak
-        if (filename.match(/local(-?[\w\d]+){0,2}\.bak/i)) {
-          fs.renameSync(
-            "./config/" + filename,
-            "./config/" + filename.replace("bak", "json")
-          );
-        }
-      });
+      localFilesRestore();
     });
 
     it("should respond with HTTP status 400 if the config file does not exist", done => {
@@ -1621,6 +1609,11 @@ describe(apiRoot, () => {
 
       let configPath = generateConfigFilenamePath();
       let fullPath = path.resolve(configPath);
+
+      // The local file needs to be cleaned up, as on non-Windows systems
+      // this test does not complete successfully due to the file not being
+      // able to be made read only
+      localFilesCleanup();
 
       // Create the file, as it will have been removed between tests, and
       // make it read only. With the file being read only, it is unable to
